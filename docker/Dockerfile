@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy requirements first for better caching
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Set PATH to include installed packages for subsequent pip commands
@@ -31,7 +32,7 @@ COPY . .
 RUN pip install --no-cache-dir --prefix=/install .
 
 # Stage 2: Runtime stage with CUDA
-FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04
+FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
 
 # Install Python 3.10
 RUN apt-get update && apt-get install -y \
